@@ -5,11 +5,23 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 
+use Illuminate\Support\Facades\Response;
+
+
 class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
+
+public function getCsrfToken()
+{
+    $csrfToken = csrf_token();
+    
+    // Return the CSRF token in a JSON response
+    return Response::json(['csrf_token' => $csrfToken]);
+}
+
     public function index()
     {
         $users = User::all();
